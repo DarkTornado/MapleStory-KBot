@@ -1,6 +1,6 @@
 /*
 MapleStory Bot
-© 2021 Skill Drottinn, All rights reserved.
+© 2021 Dark Tornado, All rights reserved.
 */
 
 const Maple = {};
@@ -18,7 +18,7 @@ Maple.getCharInfo = (name) => {
         result.job = data.get(1).text();
         return result;
     } catch (e) {
-        return nukk;
+        return null;
     }
 }
 
