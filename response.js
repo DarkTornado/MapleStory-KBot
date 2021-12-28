@@ -3,7 +3,9 @@ MapleStory Bot
 © 2021 Dark Tornado, All rights reserved.
 */
 
+
 const Maple = {};
+COMPRESS = "\u200b".repeat(500);
 Maple.getCharInfo = (name) => {
     try {
         var data = org.jsoup.Jsoup.connect("https://maplestory.nexon.com/Ranking/World/Total?c=" + name)
@@ -52,6 +54,20 @@ Maple.getDojangInfo = (name) => {
         return null;
     }
 }
+Maple.getRoyalStyle = () => {
+    var data = org.jsoup.Jsoup.connect("https://orng-api.nexon.com/api/services/maplestory/dashboard")
+        .ignoreContentType(true).ignoreHttpErrors(true).get().text();
+    data = JSON.parse(data);
+    data = data.data.charts;
+    var result = [" === " + data[3].title + " === \n", " === " + data[4].title + " === \n"];
+    for (var n = 0; n < data[3].dataSet.length; n++) {
+        result[0] += "\n" + data[3].dataSet[n].trialresult_name +
+            "\n └" + Number(data[3].dataSet[n].realprob) + "% (" + Number(data[3].dataSet[n].prob) + "%)";
+        result[1] += "\n" + data[4].dataSet[n].trialresult_name +
+            "\n └" + Number(data[4].dataSet[n].realprob) + "% (" + Number(data[4].dataSet[n].prob) + "%)";
+    }
+    return "[로얄 스타일 모니터링 정보]" + Maple.COMPRESS + "\n\n" + result[0] + "\n\n\n" + result[1];
+}
 
 response = (room, msg, sender, isGroupChat, replier, ImageDB, packageName) => {
     var cmd = msg.split(" ");
@@ -76,6 +92,9 @@ response = (room, msg, sender, isGroupChat, replier, ImageDB, packageName) => {
             "\n랭킹 : " + result.rank +
             "\n월드랭킹 : " + result.rank_world +
             "\n도전일 : " + result.date);
+    }
+    if (msg == "/로얄") {
+        replier.reply(Maple.getRoyalStyle());
     }
 }
 
