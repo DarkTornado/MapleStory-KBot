@@ -15,4 +15,4 @@
 * [x] 메이플 로얄 스타일 확률 모니터링
 
 ## License
-* AGPL 3.0
+* [AGPL 3.0](LICENSE)
