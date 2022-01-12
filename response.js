@@ -1,6 +1,6 @@
 /*
 MapleStory Bot
-© 2021 Dark Tornado, All rights reserved.
+© 2021-2022 Dark Tornado, All rights reserved.
 */
 
 
