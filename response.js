@@ -5,7 +5,7 @@ MapleStory Bot
 
 
 const Maple = {};
-COMPRESS = "\u200b".repeat(500);
+Maple.COMPRESS = "\u200b".repeat(500);
 Maple.getCharInfo = (name) => {
     try {
         var data = org.jsoup.Jsoup.connect("https://maplestory.nexon.com/Ranking/World/Total?c=" + name)
