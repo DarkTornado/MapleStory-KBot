@@ -3,7 +3,6 @@ MapleStory Bot
 © 2021-2022 Dark Tornado, All rights reserved.
 */
 
-
 const Maple = {};
 Maple.COMPRESS = "\u200b".repeat(500);
 Maple.getCharInfo = (name) => {
@@ -67,6 +66,14 @@ Maple.getRoyalStyle = () => {
             "\n └" + Number(data[4].dataSet[n].realprob) + "% (" + Number(data[4].dataSet[n].prob) + "%)";
     }
     return "[로얄 스타일 모니터링 정보]" + Maple.COMPRESS + "\n\n" + result[0] + "\n\n\n" + result[1];
+};
+Maple.getMesoAve = () => {
+    var url = "https://commapi.gamemarket.kr/comm/graph";
+    var data = org.jsoup.Jsoup.connect(url)
+        .ignoreContentType(true).ignoreContentType(true)
+        .post().wholeText();
+    data = JSON.parse(data);
+    return data.reverse[0].average + "포인트";
 }
 
 response = (room, msg, sender, isGroupChat, replier, ImageDB, packageName) => {
@@ -96,5 +103,9 @@ response = (room, msg, sender, isGroupChat, replier, ImageDB, packageName) => {
     if (msg == "/로얄") {
         replier.reply(Maple.getRoyalStyle());
     }
+    if (msg == "/메소") {
+        replier.reply(Maple.getMesoAve());
+    }
+
 }
 
